@@ -5,7 +5,7 @@ module Spree::ProductsControllerDecorator
 
       @taxon = params[:taxon_id].present? ? Spree::Taxon.find(params[:taxon_id]) : @product.taxons.first
 
-      if stale?(etag: product_etag, last_modified: @product.updated_at.utc, public: true)
+      if stale?(etag: product_etag_new, last_modified: @product.updated_at.utc, public: true)
         @product_summary = Spree::ProductSummaryPresenter.new(@product).call
         @product_properties = @product.product_properties.includes(:property)
         @product_price = @product.price_in(current_currency).amount
@@ -15,7 +15,7 @@ module Spree::ProductsControllerDecorator
       end
     end
 
-    def product_etag
+    def product_etag_new
       [
         store_etag,
         @product,
