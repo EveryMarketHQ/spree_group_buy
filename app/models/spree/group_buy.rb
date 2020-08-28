@@ -8,6 +8,10 @@ module Spree
     
     before_validation :set_currency
 
+    def display_price
+      Spree::Money.new(price || 0, currency: currency)
+    end
+
     private
 
     def set_currency
