@@ -1,0 +1,32 @@
+<div class="row">
+  <div data-hook="admin_variant_form_fields" class="col-12 col-md-6">
+    <div data-hook="variants">
+
+      <div class="form-group" data-hook="quantity">
+        <%= f.label :quantity, Spree.t(:quantity) %>
+        <%= f.text_field :quantity, class: 'form-control' %>
+      </div>
+
+      <div class="form-group" data-hook="price">
+        <%= f.label :price, Spree.t(:price) %>
+        <%= f.text_field :price, value: number_to_currency(@group_buy.price, unit: ''), class: 'form-control' %>
+      </div>
+
+      <div class="form-group" data-hook="expires_at">
+
+          <%= f.label :expires_at, Spree.t(:expires_at) %>
+          <%= f.error_message_on :expires_at %>
+          <%= f.text_field :expires_at, value: datepicker_field_value(@group_buy.expires_at), class: 'datepicker form-control' %>
+      </div>
+
+      <div class="form-group" data-hook="state">
+        <%= f.label :state, Spree.t(:state) %>
+        <%= select_tag 'group_buy[state]', options_for_select(['active', 'done'], @group_buy.state), class: 'select2' %>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

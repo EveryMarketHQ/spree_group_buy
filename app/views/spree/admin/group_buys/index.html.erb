@@ -1,0 +1,49 @@
+<%= render 'spree/admin/shared/product_tabs', current: :group_buys %>
+<%= render 'spree/admin/shared/error_messages', target: @product %>
+
+<%# Place for new variant form %>
+<div id="new_group_buy" data-hook></div>
+
+<% if @group_buys.any? %>
+<div class="table-responsive">
+  <table class="table">
+    <thead data-hook="variants_header">
+      <tr>
+        <th><%= Spree.t(:quantity) %></th>
+        <th><%= Spree.t(:price) %></th>
+        <th><%= Spree.t(:expires_at) %></th>
+        <th><%= Spree.t(:engaged_count) %></th>
+        <th><%= Spree.t(:state) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody id="sortVert">
+    <% @group_buys.each do |group_buy| %>
+      <tr id="<%= spree_dom_id group_buy %>" data-hook="group_buys_row">
+        <td><%= group_buy.quantity %></td>
+        <td><%= group_buy.price %></td>
+        <td><%= group_buy.expires_at %></td>
+        <td><%= group_buy.engaged_count %></td>
+        <td><%= group_buy.state %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(group_buy, no_text: true) if can?(:edit, group_buy) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <div class="no-objects-found alert alert-info">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::GroupBuy)) %>
+    <% if can?(:create, Spree::GroupBuy) && !@product.empty_option_values? %>
+      - <%= link_to(Spree.t(:add_one), new_admin_product_group_buy_url(@product)) %>!
+    <% end %>
+  </div>
+<% end %>
+
+
+<% content_for :page_actions do %>
+  <%= product_preview_link(@product) %>
+  <%= button_link_to(Spree.t(:new_group_buy), new_admin_product_group_buy_url(@product), { icon: 'add', :'data-update' => 'new_group_buy', class: 'btn-success', id: 'new_var_link' }) if can? :create, Spree::GroupBuy %>
+<% end %>

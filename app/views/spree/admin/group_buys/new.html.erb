@@ -1,0 +1,15 @@
+<%= render partial: 'spree/admin/shared/product_tabs', locals: {current: :group_buys} %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @group_buy } %>
+
+<%= form_for [:admin, @product, @group_buy] do |f| %>
+  <div class="card mb-3 bg-light">
+    <div class="card-body">
+      <fieldset data-hook="admin_group_buy_new_form">
+        <legend class="border-bottom"><%= Spree.t(:new_group_buy) %></legend>
+        <%= render partial: 'form', locals: { f: f } %>
+        <%= render partial: 'spree/admin/shared/new_resource_links' %>
+      </fieldset>
+    </div>
+  </div>
+<% end %>
