@@ -1,7 +1,7 @@
 module Spree
   class GroupBuy < Spree::Base
 
-    belongs_to :product
+    belongs_to :product, touch: true
     has_many :line_items
   
     scope :active, -> { where(state: 'active') }
