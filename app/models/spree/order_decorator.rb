@@ -30,13 +30,18 @@ module Spree::OrderDecorator
 
       touch :completed_at
 
-      if is_group_buy?
-      	deliver_order_confirmation_email unless confirmation_delivered?
-	  else
-	  	deliver_order_confirmation_email unless confirmation_delivered?
-	  end
+      if group_buy
+      	deliver_groupbuy_order_confirmation_email unless confirmation_delivered?
+  	  else
+  	  	deliver_order_confirmation_email unless confirmation_delivered?
+  	  end
 
       consider_risk
+    end
+
+    def deliver_groupbuy_order_confirmation_email
+      Spree::OrderMailer.groupbuy_confirm_email(id).deliver_later
+      update_column(:confirmation_delivered, true)
     end
 
     def check_group_buy
@@ -50,6 +55,14 @@ module Spree::OrderDecorator
       return false
     end
 
+    # if it is group buy order then just authorize, otherwise purchase
+    def process_payments!
+        if group_buy
+          process_payments_with(:authorize!)
+        else
+          process_payments_with(:purchase!)
+        end
+    end
 end
 
 Spree::Order.prepend Spree::OrderDecorator
