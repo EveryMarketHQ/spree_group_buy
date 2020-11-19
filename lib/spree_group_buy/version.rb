@@ -10,9 +10,8 @@ module SpreeGroupBuy
   module VERSION
     MAJOR = 0
     MINOR = 0
-    TINY  = 2
-    PRE   = 'alpha'.freeze
+    TINY  = 1
 
-    STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
+    STRING = [MAJOR, MINOR, TINY].compact.join('.')
   end
 end

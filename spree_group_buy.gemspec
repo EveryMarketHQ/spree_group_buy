@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = 'Spree group buy extension'
   s.required_ruby_version = '>= 2.3.3'
 
-  s.author    = 'Everymarket'
+  s.author    = 'Josh Yan'
   s.email     = 'josh@everymarket.com'
   s.homepage  = 'https://github.com/joshyan/spree_group_buy'
   s.license = 'BSD-3-Clause'
