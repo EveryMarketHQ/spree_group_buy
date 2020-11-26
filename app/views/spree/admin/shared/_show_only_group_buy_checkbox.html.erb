@@ -1,0 +1,6 @@
+<div class="checkbox mt-2">
+  <%= label_tag 'q_group_buy_eq' do %>
+    <%= f.check_box :group_buy_eq, {checked: (params[:q][:group_buy_eq] == '1')}, '1', '' %>
+    <%= Spree.t(:show_only_group_buy_orders) %>
+  <% end %>
+</div>

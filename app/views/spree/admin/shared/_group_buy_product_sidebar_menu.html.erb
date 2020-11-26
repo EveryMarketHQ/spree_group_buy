@@ -1,0 +1,7 @@
+<%= content_tag :li do %>
+  <%= link_to_with_icon 'money',
+    Spree.t(:group_buys),
+    admin_product_group_buys_url(@product),
+    class: "nav-link #{'active' if current == :group_buys}" %>
+
+<% end if can?(:admin, Spree::Product) && !@product.deleted? %>
