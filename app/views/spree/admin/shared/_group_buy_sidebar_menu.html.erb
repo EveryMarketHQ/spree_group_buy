@@ -1,5 +1,5 @@
 <% if can? :admin, Spree::Order %>
-<ul class="nav nav-sidebar border-bottom">
-  <%= tab :group_buy_orders, url: '/admin/orders?q[group_buy_eq]=1', icon: 'shopping-cart' %>
+<ul class="nav nav-sidebar border-bottom" id="sidebarOrder">
+	<%= main_menu_tree Spree.t(:orders), icon: "list.svg", sub_menu: "orders", url: "#sidebar-orders" %>
 </ul>
 <% end %>
