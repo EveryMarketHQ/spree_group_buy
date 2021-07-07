@@ -1,7 +1,7 @@
 module Spree::OrderDecorator
 
 	def self.prepended(base)
-		base.whitelisted_ransackable_attributes = %w[completed_at email number state payment_state shipment_state total considered_risky group_buy channel]
+		base.whitelisted_ransackable_attributes = %w[completed_at email number state payment_state shipment_state total considered_risky group_buy channel approver_id]
 	end
 
     def update_line_item_prices!
